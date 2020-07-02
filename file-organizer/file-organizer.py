@@ -54,24 +54,20 @@ for file_ in list_:
         continue
 
     # 2. Loop through DIRECTORIES
-    for i in DIRECTORIES:
-        ext_list = DIRECTORIES[i]
+    for key_, value_ in DIRECTORIES.items():
         # 3. If the extension is in one of the lists
-        if ext in ext_list:
-            print(ext_list)
+        if ext in value_:
             # 4. Check if the key is a folder in the current directory already
-            if i in list_:
-                print(5)
+            if os.path.exists(path+'/'+key_): 
                 # 5. If the key is already a folder in the directory,
                 # move the file into that directory using shutil.move
-                shutil.move(os.path.join(path,file_),os.path.join(os.path.join(path,i),file_)
+                shutil.move(path+'/'+file_,path+'/'+key_+'/'+file_)
                 # 6. If the folder is not in the current directory already,
                 # create the folder
             else:
-                print(7)
-                os.mkdir(os.path.join(path,i))
+                os.makedirs(path+'/'+key_)
                 # 7. Move the file into that directory using shutil.move
-                shutil.move(os.path.join(path,file_),os.path.join(path,i))
+                shutil.move(shutil.move(path+'/'+file_,path+'/'+key_+'/'+file_))
         # 8. Else, continue to the next iteration
         else:
             continue
